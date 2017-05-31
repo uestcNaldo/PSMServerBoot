@@ -1,12 +1,12 @@
 package com.uestc.naldo.service.impl;
 
-import com.github.pagehelper.PageHelper;
 import com.uestc.naldo.dao.WorkplanMapper;
 import com.uestc.naldo.domain.Workplan;
 import com.uestc.naldo.service.WorkplanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
 import java.util.List;
 
 @Service
@@ -37,7 +37,7 @@ public class WorkplanServiceImpl implements WorkplanService{
     @Override
     public Workplan queryWorkplanById(Long id) {
 
-        return null;
+        return this.workplanMapper.queryWorkplanById(id);
     }
 
     @Override
@@ -45,5 +45,10 @@ public class WorkplanServiceImpl implements WorkplanService{
 
         return this.workplanMapper.queryWorkplanListAll();
 
+    }
+
+    @Override
+    public List<Workplan> queryWorkplanListByTitleAndDate(String title, Date date) {
+        return this.workplanMapper.queryWorkplanListByTitleAndDate(title, date);
     }
 }

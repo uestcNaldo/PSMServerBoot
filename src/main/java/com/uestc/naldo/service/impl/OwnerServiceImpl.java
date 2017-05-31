@@ -48,4 +48,9 @@ public class OwnerServiceImpl implements OwnerService{
 
         return this.ownerMapper.queryOwnerListAll();
     }
+
+    @Override
+    public Owner loginByUsernameAndPassword(String username, String password) {
+        return this.ownerMapper.loginByUsernameAndPassword(username, password);
+    }
 }

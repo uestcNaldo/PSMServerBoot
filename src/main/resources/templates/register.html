@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="zh">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>宠物信息后台管理-管理员注册</title>
+    <link rel="icon" href="../static/i/icon.png" th:href="@{/i/icon.png}"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/amazeui.min.css" th:href="@{/css/amazeui.min.css}"/>
+
+    <style>
+        .header {
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 200%;
+            color: #333;
+            margin-top: 30px;
+        }
+        .header p {
+            font-size: 14px;
+        }
+    </style>
+
+</head>
+<body>
+<div class="header">
+    <div class="am-g">
+        <h1>管理员信息注册</h1>
+
+    </div>
+    <hr/>
+</div>
+<div class="am-g">
+    <div class="am-u-lg-6 am-u-md-8 am-u-sm-centered">
+        <h3>注册</h3>
+        <br/>
+        <hr/>
+        <form method="post" class="am-form" name="form_admin_register" id="form_register" action="login.html" th:action="@{/web/adminRegister}" th:object="${adminRegisterForm}">
+            <label for="admin_username">用户名:</label>
+            <input type="text" checked="checked" name="admin_username" id="admin_username" th:field="*{username}" placeholder="请输入用户名" required="required"/>
+            <br/>
+            <label for="admin_password">密码:</label>
+            <input type="password" name="admin_password" id="admin_password" th:field="*{password}"  placeholder="请输入密码" required="required"/>
+            <br/>
+            <label for="admin_name">姓名:</label>
+            <input type="text" checked="checked" name="admin_name" id="admin_name" th:field="*{name}" placeholder="请输入姓名" required="required"/>
+            <br/>
+            <label for="admin_email">邮箱:</label>
+            <input type="email" name="admin_email" id="admin_email" th:field="*{email}"  placeholder="请输入邮箱" required="required"/>
+            <br/>
+            <br/>
+            <br/>
+            <div class="am-cf">
+                <input type="submit" name="register" value="注 册" class="am-btn am-btn-primary am-btn-sm am-fl"/>
+            </div>
+        </form>
+        <br/>
+        <br/>
+        <hr/>
+    </div>
+</div>
+
+<script type="text/javascript" src="../static/js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+<script type="text/javascript" src="../static/js/amazeui.min.js"></script>
+</body>
+</html>

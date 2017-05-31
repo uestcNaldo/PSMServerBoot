@@ -15,6 +15,19 @@ import java.util.List;
 
 public interface OwnerMapper {
 
+
+    @Select("SELECT * FROM owner WHERE ousername=#{username} AND opassword=#{password}")
+    @Results(id = "OwnerByUANDP",value = {
+            @Result(property = "id", column = "oid", javaType = Long.class),
+            @Result(property = "username", column = "ousername", javaType = String.class),
+            @Result(property = "password", column = "opassword", javaType = String.class),
+            @Result(property = "name", column = "oname", javaType = String.class),
+            @Result(property = "email", column = "oemail", javaType = String.class),
+            @Result(property = "sex", column = "osex", javaType = String.class),
+            @Result(property = "age", column = "oage", javaType = Integer.class)
+    })
+    Owner loginByUsernameAndPassword(@Param("username") String username, @Param("password") String password);
+
     @Insert("INSERT IGNORE INTO owner(oid, ousername, opassword, oname, oemail, osex, oage) VALUES(null, #{username}, #{password}, #{name}, #{email}, #{sex}, #{age}) ")
     int add(Owner owner);
 
@@ -92,7 +105,7 @@ public interface OwnerMapper {
             return new SQL(){{
                 SELECT("*");
                 FROM("owner");
-                WHERE("oname like '%#{name}%'");
+                WHERE("oname like CONCAT(CONCAT('%',#{name}),'%')");
                 ORDER_BY("oid");
 
             }}.toString();

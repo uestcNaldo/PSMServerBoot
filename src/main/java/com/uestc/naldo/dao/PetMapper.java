@@ -24,7 +24,7 @@ public interface PetMapper {
     @UpdateProvider(type = PetSqlBuilder.class, method = "buildUpdatePet")
     int update(Pet pet);
 
-    @Select("SELECT * FROM pet WHERE oid=#{id}")
+    @Select("SELECT * FROM pet WHERE pid=#{id}")
     @Results(id = "PetById",value = {
             @Result(property = "id", column = "pid", javaType = Long.class),
             @Result(property = "name", column = "pname", javaType = String.class),
@@ -55,7 +55,7 @@ public interface PetMapper {
     })
     List<Pet> queryPetListAll();
 
-    @Select("SELECT * FROM pet WHERE pname like '%#{name}%'")
+    @Select("SELECT * FROM pet WHERE pname like CONCAT(CONCAT('%',#{name}),'%')")
     @Results(id = "PetListByName",value = {
             @Result(property = "id", column = "pid", javaType = Long.class),
             @Result(property = "name", column = "pname", javaType = String.class),
@@ -68,8 +68,23 @@ public interface PetMapper {
             @Result(property = "oid", column = "ownerId", javaType = Long.class),
             @Result(property = "cid", column = "courseId", javaType = Long.class)
     })
-    List<Pet> queryPetListByName(String name);
+    List<Pet> queryPetListByName(@Param("name") String name);
 
+
+    @Select("SELECT * FROM pet WHERE ownerId=#{oid}")
+    @Results(id = "PetListByOid",value = {
+            @Result(property = "id", column = "pid", javaType = Long.class),
+            @Result(property = "name", column = "pname", javaType = String.class),
+            @Result(property = "age", column = "page", javaType = Integer.class),
+            @Result(property = "sex", column = "psex", javaType = String.class),
+            @Result(property = "species", column = "pspecies", javaType = String.class),
+            @Result(property = "hrStatus", column = "phr_status", javaType = String.class),
+            @Result(property = "start", column = "start", javaType = Date.class),
+            @Result(property = "end", column = "end", javaType = Date.class),
+            @Result(property = "oid", column = "ownerId", javaType = Long.class),
+            @Result(property = "cid", column = "courseId", javaType = Long.class)
+    })
+    List<Pet> queryPetListByOid(Long oid);
 
     class PetSqlBuilder{
         public String buildAddPet(final Pet pet){
@@ -82,7 +97,7 @@ public interface PetMapper {
                 }
                 if (!(pet.getCid()==null)){
                     INTO_COLUMNS("courseId");
-                    INTO_VALUES("cid");
+                    INTO_VALUES("#{cid}");
                 }
                 if (!(pet.getStart()==null)){
                     INTO_COLUMNS("start");

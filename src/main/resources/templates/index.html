@@ -1,10 +1,125 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="zh-CN">
+<html xmlns:th="http://www.thymeleaf.org" lang="zh">
 <head>
-    <meta charset="UTF-8"/>
-    <title>Title</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>后台管理主页</title>
+    <link rel="icon" href="../static/i/icon.png" th:href="@{/i/icon.png}"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/amazeui.min.css" th:href="@{/css/amazeui.min.css}"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/admin.css" th:href="@{/css/admin.css}"/>
+
+
 </head>
 <body>
+<header class="am-topbar am-topbar-inverse admin-header">
+    <div class="am-topbar-brand">
+        <strong>宠物信息管理后台系统</strong> <small>Sichuan Jiabao Pet Service Co., Ltd.</small>
+    </div>
+    <div class="am-collapse am-topbar-collapse" id="topbar-collapse">
+        <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list">
+            <li><a href="login.html" th:href="@{/web/login}"><span class="am-icon-power-off"></span> 退出</a></li>
+        </ul>
+    </div>
+</header>
+<div class="am-cf admin-main">
+    <!--sider bar-->
+    <div class="admin-sidebar am-offcanvas" id="admin-offcanvas">
+        <div class="am-offcanvas-bar admin-offcanvas-bar">
+            <ul class="am-list admin-sidebar-list">
+                <li><a class="am-cf" href="index.html"><span class="am-icon-home"></span> 首页</a></li>
+                <li class="admin-parent">
+                    <a class="am-cf" data-am-collapse="{target: '#collapse-nav-pet'}"><span class="am-icon-file"></span> 宠物管理 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
+                    <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav-pet">
+                        <li><a href="petlist.html" th:href="@{/web/petlist}" class="am-cf"><span class="am-icon-table"></span> 宠物列表</a></li>
+                        <li><a href="petadd.html" th:href="@{/web/petadd}"><span class="am-icon-pencil-square-o"></span> 添加宠物</a></li>
+                    </ul>
+                </li>
+                <li class="admin-parent">
+                    <a class="am-cf" data-am-collapse="{target: '#collapse-nav-course'}"><span class="am-icon-file"></span> 课程管理 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
+                    <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav-course">
+                        <li><a href="courselist.html" th:href="@{/web/courselist}" class="am-cf"><span class="am-icon-table"></span> 课程列表</a></li>
+                        <li><a href="courseadd.html" th:href="@{/web/courseadd}"><span class="am-icon-pencil-square-o"></span> 添加课程</a></li>
+                    </ul>
+                </li>
+                <li class="admin-parent">
+                    <a class="am-cf" data-am-collapse="{target: '#collapse-nav-trainer'}"><span class="am-icon-file"></span> 训练师管理 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
+                    <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav-trainer">
+                        <li><a href="trainerlist.html" th:href="@{/web/trainerlist}" class="am-cf"><span class="am-icon-table"></span> 训练师列表</a></li>
+                        <li><a href="traineradd.html" th:href="@{/web/traineradd}"><span class="am-icon-pencil-square-o"></span> 添加训练师</a></li>
+                    </ul>
+                </li>
+                <li class="admin-parent">
+                    <a class="am-cf" href="attendancelist.html" th:href="@{/web/attendancelist}"><span class="am-icon-table"></span> 考勤记录 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
+                </li>
+                <li class="admin-parent">
+                    <a class="am-cf" data-am-collapse="{target: '#collapse-nav-owner'}"><span class="am-icon-file"></span> 宠物主人管理 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
+                    <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav-owner">
+                        <li><a href="ownerlist.html" th:href="@{/web/ownerlist}" class="am-cf"><span class="am-icon-table"></span> 宠物主人列表</a></li>
+                        <li><a href="owneradd.html" th:href="@{/web/owneradd}"><span class="am-icon-pencil-square-o"></span> 添加宠物主人</a></li>
+                    </ul>
+                </li>
+                <li class="admin-parent">
+                    <a class="am-cf" href="feedbacklist.html" th:href="@{/web/feedbacklist}"><span class="am-icon-table"></span> 反馈信息 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
+                </li>
+                <li class="admin-parent">
+                    <a class="am-cf" data-am-collapse="{target: '#collapse-nav-notifi'}"><span class="am-icon-file"></span> 通知管理 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
+                    <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav-notifi">
+                        <li><a href="notificationlist.html" th:href="@{/web/notifilist}" class="am-cf"><span class="am-icon-table"></span> 通知列表</a></li>
+                        <li><a href="notificationadd.html" th:href="@{/web/notifiadd}"><span class="am-icon-pencil-square-o"></span> 添加通知</a></li>
+                    </ul>
+                </li>
+                <li class="admin-parent">
+                    <a class="am-cf" href="adminlist.html" th:href="@{/web/adminlist}"><span class="am-icon-file"></span> 管理员 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
+                </li>
 
+            </ul>
+
+            <div class="am-panel am-panel-default admin-sidebar-panel">
+                <div class="am-panel-bd">
+                    <p><span class="am-icon-bookmark"></span> 当前时间</p>
+                    <p th:text="${#dates.createNow()}"></p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!--content-->
+    <div class="admin-content">
+        <div class="admin-content-body">
+            <div class="am-cf am-padding">
+                <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">学校信息</strong> / <small>学校简介</small></div>
+            </div>
+            <hr/>
+            <div class="am-g">
+                <div class="am-u-sm-11 am-u-sm-offset-1 am-u-sm-centered">
+                    <h2>学校名称</h2>
+                    <p class="am-text-primary">四川家宝宠物学校</p>
+
+                    <hr/>
+                </div>
+                <div class="am-u-sm-11 am-u-sm-offset-1 am-u-sm-centered">
+                    <h3>简介</h3>
+                    <p>成都家宝训犬基地成立于2012年是成都市犬业协会理事单位、成都市犬业协会训犬师培训基地，隶属于四川家宝宠物服务有限公司，主营成都训犬、宠物寄养、工作犬安防、宠物犬表演、影视犬拍摄、名犬出售、竞技犬训练。基地占地面积9000余平，专业训犬员及管理员超过15人，训犬基地负责人唐先生从事训犬行业8年多，经验丰富，技术独到。本基地位于成都市双流县彭镇，交通方便。训犬技术专业，犬舍环境干净。是一所专业的训犬、宠物寄养中心。采用国际上一流的训犬方法合程教学，使用柔软，人性化的训练方式。</p>
+                    <br>
+                    <br>
+                    <h3>联系方式</h3>
+                    <p>联系电话：18224449240</p>
+                    <p>地址：成都市双流县彭镇福田村3组28号</p>
+
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+<script type="javascript" src="../static/js/jquery.min.js" th:href="@{/js/jquery.min.js}"></script>
+<script type="javascript" src="../static/js/amazeui.min.js" th:href="@{/js/amazeui.min.js}"></script>
+<script type="javascript" src="../static/js/app.js" th:href="@{/js/app.js}"></script>
 </body>
 </html>

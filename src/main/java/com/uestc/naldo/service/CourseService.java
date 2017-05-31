@@ -21,6 +21,6 @@ public interface CourseService {
 
     List<Course> queryCourseListAll();
 
-
+    Course queryCourseById(Long id);
 
 }

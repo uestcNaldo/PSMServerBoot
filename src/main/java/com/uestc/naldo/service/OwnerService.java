@@ -23,4 +23,6 @@ public interface OwnerService {
 
     List<Owner> queryOwnerListAll();
 
+    Owner loginByUsernameAndPassword(String username, String password);
+
 }

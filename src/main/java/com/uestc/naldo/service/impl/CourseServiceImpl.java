@@ -44,4 +44,9 @@ public class CourseServiceImpl implements CourseService{
 
         return this.courseMapper.queryCourseListAll();
     }
+
+    @Override
+    public Course queryCourseById(Long id) {
+        return this.courseMapper.queryCourseById(id);
+    }
 }

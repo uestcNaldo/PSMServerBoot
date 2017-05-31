@@ -19,6 +19,11 @@ public class AdminServiceImpl implements AdminService{
     private AdminMapper adminMapper;
 
     @Override
+    public Admin login(String username, String password) {
+        return this.adminMapper.selectAdminByUsernameAndPassword(username, password);
+    }
+
+    @Override
     public int add(Admin admin) {
         return this.adminMapper.add(admin);
     }
@@ -42,6 +47,7 @@ public class AdminServiceImpl implements AdminService{
 
     @Override
     public List<Admin> queryAdminListAll() {
+
         return this.adminMapper.queryAdminListAll();
     }
 

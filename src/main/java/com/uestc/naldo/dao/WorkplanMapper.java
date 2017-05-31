@@ -25,6 +25,17 @@ public interface WorkplanMapper {
     int update(Workplan workplan);
 
 
+    @Select("SELECT * FROM workplan WHERE wpid=#{id}")
+    @Results(id = "WorkplanById", value = {
+            @Result(property = "id", column = "wpid", javaType = Long.class),
+            @Result(property = "title", column = "wp_title", javaType = String.class),
+            @Result(property = "content", column = "wp_content", javaType = String.class),
+            @Result(property = "date", column = "wp_date", javaType = Date.class),
+            @Result(property = "aid", column = "admin_aid", javaType = Long.class)
+    })
+    Workplan queryWorkplanById(Long id);
+
+
     @Select("SELECT * FROM workplan")
     @Results(id = "WorkplanListAll", value = {
             @Result(property = "id", column = "wpid", javaType = Long.class),
@@ -37,6 +48,16 @@ public interface WorkplanMapper {
 
 
 
+    @SelectProvider(type = WorkplanSqlBuilder.class, method = "buildQueryWorkplanListByTitleAndDate")
+    @Results(id = "WorkplanListByTitleAndDate", value = {
+            @Result(property = "id", column = "wpid", javaType = Long.class),
+            @Result(property = "title", column = "wp_title", javaType = String.class),
+            @Result(property = "content", column = "wp_content", javaType = String.class),
+            @Result(property = "date", column = "wp_date", javaType = Date.class),
+            @Result(property = "aid", column = "admin_aid", javaType = Long.class)
+    })
+    List<Workplan> queryWorkplanListByTitleAndDate(@Param("title") String title,@Param("date") Date date);
+
     class WorkplanSqlBuilder{
 
         public String buildUpdateWorkplan(Workplan workplan){
@@ -44,8 +65,27 @@ public interface WorkplanMapper {
                 UPDATE("workplan");
                 if (StringUtils.isNotBlank(workplan.getTitle())) SET("wp_title=#{title}");
                 if (StringUtils.isNotBlank(workplan.getContent())) SET("wp_content=#{content}");
-                WHERE("admin_aid=#{aid}");
+                if (workplan.getDate()!=null) SET("wp_date=#{date}");
+                WHERE("wpid=#{id}");
             }}.toString();
+        }
+
+        public String buildQueryWorkplanListByTitleAndDate(@Param("title") final String title, @Param("date") final Date date){
+            return new SQL(){{
+                SELECT("*");
+                FROM("workplan");
+                if (title != null){
+                    WHERE("wp_title LIKE CONCAT(CONCAT('%',#{title}),'%')");
+                }
+                if (date != null){
+                    WHERE("wp_date =#{date}");
+                }
+                ORDER_BY("wpid");
+
+
+            }}.toString();
+
+
         }
 
     }

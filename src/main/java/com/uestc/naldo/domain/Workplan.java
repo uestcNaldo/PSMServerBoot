@@ -1,7 +1,8 @@
 package com.uestc.naldo.domain;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.sql.Date;
-import java.sql.Time;
 
 /**
  * Created by Naldo on 2017/5/15.
@@ -13,10 +14,8 @@ public class Workplan {
     private String title;
 
     private String content;
-
+    @JSONField(format = "yyyy-MM-dd")
     private Date date;
-
-    private Time time;
 
     private Long aid;
 
@@ -70,11 +69,4 @@ public class Workplan {
         this.id = id;
     }
 
-    public Time getTime() {
-        return time;
-    }
-
-    public void setTime(Time time) {
-        this.time = time;
-    }
 }

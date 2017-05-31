@@ -49,4 +49,9 @@ public class TrainerServiceImpl implements TrainerService{
 
         return this.trainerMapper.queryTrainerListByName(name);
     }
+
+    @Override
+    public Trainer login(String username, String password) {
+        return this.trainerMapper.login(username, password);
+    }
 }

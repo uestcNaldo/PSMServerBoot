@@ -50,4 +50,9 @@ public class PetServiceImpl implements PetService{
         return this.petMapper.queryPetListByName(name);
 
     }
+
+    @Override
+    public List<Pet> queryPetListByOid(Long oid) {
+        return this.petMapper.queryPetListByOid(oid);
+    }
 }

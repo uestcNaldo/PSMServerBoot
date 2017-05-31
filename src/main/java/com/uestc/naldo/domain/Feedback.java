@@ -1,10 +1,9 @@
 package com.uestc.naldo.domain;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.sql.Date;
 
-/**
- * Created by Naldo on 2017/5/15.
- */
 public class Feedback {
 
     private Long id;
@@ -12,7 +11,7 @@ public class Feedback {
     private String title;
 
     private String content;
-
+    @JSONField(format = "yyyy-MM-dd")
     private Date date;
 
     private Long oid;

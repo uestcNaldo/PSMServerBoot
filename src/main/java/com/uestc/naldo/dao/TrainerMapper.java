@@ -14,6 +14,22 @@ import java.util.List;
 @Component
 public interface TrainerMapper {
 
+
+    @Select("SELECT * FROM trainer WHERE tusername=#{username} AND tpassword=#{password}")
+    @Results(id = "TrainerLogin",value = {
+            @Result(property = "id", column = "tid", javaType = Long.class),
+            @Result(property = "username", column = "tusername", javaType = String.class),
+            @Result(property = "password", column = "tpassword", javaType = String.class),
+            @Result(property = "name", column = "tname", javaType = String.class),
+            @Result(property = "age", column = "tage", javaType = Integer.class),
+            @Result(property = "sex", column = "tsex", javaType = String.class),
+            @Result(property = "email", column = "temail", javaType = String.class),
+            @Result(property = "position", column = "tposition", javaType = String.class),
+            @Result(property = "maxim", column = "tmaxim", javaType = String.class),
+            @Result(property = "intro", column = "tintro", javaType = String.class)
+    })
+    Trainer login(@Param("username") String username, @Param("password") String password);
+
     @InsertProvider(type = TrainerSqlBuilder.class, method = "buildAddTrainer")
     int add(Trainer trainer);
 
@@ -41,7 +57,7 @@ public interface TrainerMapper {
 
 
 
-    @Select("SELECT * FROM trainer WHERE tname like '%#{name}%'")
+    @Select("SELECT * FROM trainer WHERE tname like CONCAT(CONCAT('%',#{name}),'%')")
     @Results(id = "TrainerListByName",value = {
             @Result(property = "id", column = "tid", javaType = Long.class),
             @Result(property = "username", column = "tusername", javaType = String.class),

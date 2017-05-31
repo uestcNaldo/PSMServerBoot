@@ -12,6 +12,17 @@ import java.util.List;
 @Component
 public interface AdminMapper {
 
+
+    @Select("SELECT * FROM admin WHERE ausername=#{username} AND apassword=#{password}")
+    @Results(id = "AdminResultByUsernameAndPassword", value = {
+            @Result(property = "id", column = "aid", javaType = Long.class),
+            @Result(property = "username", column = "ausername", javaType = String.class),
+            @Result(property = "password", column = "apassword", javaType = String.class),
+            @Result(property = "name", column = "aname", javaType = String.class),
+            @Result(property = "email", column = "aemail", javaType = String.class)
+    })
+    Admin selectAdminByUsernameAndPassword(@Param("username") String username,@Param("password") String password);
+
     @Insert("INSERT IGNORE INTO admin(aid, ausername, apassword, aname, aemail) VALUES(null, #{username}, #{password}, #{name}, #{email})")
     int add(Admin admin);
 
@@ -26,7 +37,6 @@ public interface AdminMapper {
             @Result(property = "name", column = "aname", javaType = String.class),
             @Result(property = "email", column = "aemail", javaType = String.class)
     })
-
     Admin queryById(Long id);
 
 

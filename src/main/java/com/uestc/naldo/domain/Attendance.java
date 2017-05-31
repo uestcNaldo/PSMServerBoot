@@ -1,15 +1,16 @@
 package com.uestc.naldo.domain;
 
+
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.sql.Date;
 import java.sql.Time;
 
-/**
- * Created by Naldo on 2017/5/15.
- */
+
 public class Attendance {
 
     private Long id;
-
+    @JSONField(format = "yyyy-MM-dd")
     private Date date;
 
     private Time time;

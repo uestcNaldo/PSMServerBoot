@@ -20,5 +20,6 @@ public interface TrainerService {
 
     List<Trainer> queryTrainerByName(String name);
 
+    Trainer login(String username, String password);
 
 }

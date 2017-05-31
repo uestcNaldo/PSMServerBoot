@@ -1,13 +1,68 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="zh-CN">
+<html xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org" lang="zh">
 <head>
-    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>宠物信息后台管理-登录</title>
+    <link rel="icon" href="../static/i/icon.png" th:href="@{/i/icon.png}"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/amazeui.min.css" th:href="@{/css/amazeui.min.css}"/>
+
+    <style>
+        .header {
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 200%;
+            color: #333;
+            margin-top: 30px;
+        }
+        .header p {
+            font-size: 14px;
+        }
+    </style>
 
 </head>
 <body>
+<div class="header">
+    <div class="am-g">
+        <h1>宠物学校管理后台系统</h1>
+        <p>Sichuan Jiabao Pet Service Co., Ltd.</p>
+    </div>
+    <hr />
+</div>
+<div class="am-g">
+    <div class="am-u-lg-6 am-u-md-8 am-u-sm-centered">
+        <h3>管理员登录</h3>
+        <br/>
+        <hr/>
+        <!--/*@thymesVar id="login_message" type="java.lang.String"*/-->
+        <p th:text="${login_message}"></p>
+        <!--/*@thymesVar id="register_message" type="java.lang.String"*/-->
+        <p th:text="${register_message}"></p>
+        <!--/*@thymesVar id="adminLoginForm" type="com.uestc.naldo.domain.Admin"*/-->
+        <form method="post" class="am-form" name="form_admin_login" id="form_login" action="index.html" th:action="@{/web/adminLogin}" th:object="${adminLoginForm}">
+            <label for="admin_username">用户名:</label>
+            <input type="text" checked="checked" name="admin_username" id="admin_username" th:field="*{username}" placeholder="请输入用户名"/>
+            <br/>
+            <label for="admin_password">密码:</label>
+            <input type="password" name="admin_password" id="admin_password" th:field="*{password}"  placeholder="请输入密码"/>
+            <br/>
+            <br/>
+            <br/>
+            <div class="am-cf">
+                <input type="submit" name="login" value="登 录" class="am-btn am-btn-primary am-btn-sm am-fl"/>
+                <input type="submit" name="register" value="注 册" class="am-btn am-btn-default am-btn-sm am-fr" formaction="register.html" th:formaction="@{/web/register}"/>
+            </div>
+        </form>
+        <br/>
+        <br/>
+        <hr/>
+    </div>
+</div>
 
 
+<script type="text/javascript" src="../static/js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+<script type="text/javascript" src="../static/js/amazeui.min.js" th:src="@{/js/amazeui.min.js}"></script>
 
 </body>
 </html>

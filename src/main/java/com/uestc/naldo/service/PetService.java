@@ -17,10 +17,13 @@ public interface PetService {
 
     int update(Pet pet);
 
+
     Pet queryPetById(Long id);
 
     List<Pet> queryPetListAll();
 
     List<Pet> queryPetListByName(String name);
+
+    List<Pet> queryPetListByOid(Long oid);
 
 }
