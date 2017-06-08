@@ -4,9 +4,7 @@ import com.alibaba.fastjson.annotation.JSONField;
 
 import java.sql.Date;
 
-/**
- * Created by Naldo on 2017/5/15.
- */
+
 public class Workplan {
 
     private Long id;

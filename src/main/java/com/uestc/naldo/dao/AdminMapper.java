@@ -6,9 +6,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-/**
- * Created by Naldo on 2017/5/15.
- */
+
 @Component
 public interface AdminMapper {
 

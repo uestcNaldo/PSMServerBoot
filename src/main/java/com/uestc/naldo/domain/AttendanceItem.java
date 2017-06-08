@@ -3,9 +3,7 @@ package com.uestc.naldo.domain;
 import java.sql.Date;
 import java.sql.Time;
 
-/**
- * Created by Naldo on 2017/5/20.
- */
+
 public class AttendanceItem {
 
     private Long id;

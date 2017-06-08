@@ -2,6 +2,7 @@ package com.uestc.naldo.controller;
 
 import com.uestc.naldo.domain.*;
 import com.uestc.naldo.service.*;
+import com.uestc.naldo.util.Static;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +13,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.io.File;
 import java.util.List;
 
 
@@ -38,8 +42,8 @@ public class WebManagementController {
     private WorkplanService workplanService;
     @Autowired
     private FeedbackService feedbackService;
-
-
+    @Autowired
+    private PhotoService photoService;
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -57,6 +61,7 @@ public class WebManagementController {
     public String accessToLogin(Model model){
 
         model.addAttribute("adminLoginForm", new Admin());
+
 
         return "login";
 
@@ -691,6 +696,46 @@ public class WebManagementController {
 
         return mv;
     }
+
+    //获取图片列表界面
+    @RequestMapping(value = "/photolist")
+    public ModelAndView accessToPhotoList(){
+        ModelAndView mv = new ModelAndView("photolist");
+        List<Photo> photoListAll = photoService.queryPhotoListAll();
+        mv.addObject("photolistall",photoListAll);
+        return mv;
+    }
+
+    //获取图片添加界面
+    @RequestMapping(value = "/photoadd", method = RequestMethod.GET)
+    public ModelAndView accessToPhotoAdd(){
+        ModelAndView mv = new ModelAndView("photoadd");
+
+        return mv;
+    }
+    //添加图片操作
+    @RequestMapping(value = "/addphoto", method = RequestMethod.POST)
+    public ModelAndView addPhoto(@RequestParam("photo")MultipartFile photoFile, ModelAndView mv, HttpSession session) throws Exception{
+        String path = Static.IMAGEPATH;
+        String fileName = photoFile.getOriginalFilename();
+
+        photoFile.transferTo(new File(path+File.separator+fileName));
+        Photo photo = new Photo();
+        photo.setName(fileName);
+        photo.setPath(path);
+        int result = photoService.add(photo);
+        if (result == 1){
+            mv.addObject("AddResult","添加成功");
+        }
+        if (result == 0){
+            mv.addObject("AddResult","添加失败");
+        }
+        mv.setViewName("forward:/web/photolist");
+        return mv;
+    }
+
+
+
     //获取管理员列表
     @RequestMapping("/adminlist")
     public ModelAndView accessToAdminList(){

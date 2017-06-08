@@ -42,10 +42,49 @@ public class AppController {
     private FeedbackService feedbackService;
     @Autowired
     private AttendanceService attendanceService;
+    @Autowired
+    private PhotoService photoService;
+
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private final String MESSAGE_REGISTER_SUCCESS = "注册成功";
     private final String MESSAGE_REGISTER_FAILURE = "注册失败";
+
+
+    @ResponseBody
+    @RequestMapping(value = "/getstylephotolistall", method = RequestMethod.GET)
+    public List<Photo> getStylePhotoListAll(){
+        List<Photo> photoListAll = photoService.queryPhotoListAll();
+        return photoListAll;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/getowner", method = RequestMethod.POST)
+    public Owner getOwner(@Param("id") String id){
+        Long ownerId = Long.valueOf(id);
+        Owner owner = ownerService.queryOwnerById(ownerId);
+        return owner;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/updateowner", method = RequestMethod.POST)
+    public OperationResult updateOwner(@RequestParam("id") String id, @RequestParam("username") String username, @RequestParam("password") String password,
+                                       @RequestParam("name") String name, @RequestParam("email") String email,
+                                       @RequestParam("sex") String sex, @RequestParam("age") String age){
+        Owner owner = new Owner(Long.valueOf(id), username, password, name, email, sex, Integer.valueOf(age));
+        OperationResult updateOwnerResult = new OperationResult();
+        updateOwnerResult.setOpt("updateowner");
+        int result = ownerService.update(owner);
+        if (result == 1){
+            updateOwnerResult.setCode(1);
+            updateOwnerResult.setMessage("会员信息更新成功");
+        }
+        if (result == 0){
+            updateOwnerResult.setCode(0);
+            updateOwnerResult.setMessage("会员信息更新失败，请重试");
+        }
+        return updateOwnerResult;
+    }
 
     @ResponseBody
     @RequestMapping(value = "/getattendancelist", method = RequestMethod.POST)

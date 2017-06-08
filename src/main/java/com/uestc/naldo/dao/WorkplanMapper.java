@@ -9,9 +9,6 @@ import org.springframework.stereotype.Component;
 import java.sql.Date;
 import java.util.List;
 
-/**
- * Created by Naldo on 2017/5/15.
- */
 @Component
 public interface WorkplanMapper {
 
@@ -36,7 +33,7 @@ public interface WorkplanMapper {
     Workplan queryWorkplanById(Long id);
 
 
-    @Select("SELECT * FROM workplan")
+    @Select("SELECT * FROM workplan ORDER BY wp_date DESC")
     @Results(id = "WorkplanListAll", value = {
             @Result(property = "id", column = "wpid", javaType = Long.class),
             @Result(property = "title", column = "wp_title", javaType = String.class),

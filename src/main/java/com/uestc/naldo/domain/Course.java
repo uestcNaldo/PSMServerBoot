@@ -1,8 +1,6 @@
 package com.uestc.naldo.domain;
 
-/**
- * Created by Naldo on 2017/5/15.
- */
+
 public class Course {
     private Long id;
 

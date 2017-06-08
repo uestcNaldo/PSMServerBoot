@@ -12,7 +12,7 @@ import java.util.List;
 public class PetServiceImpl implements PetService{
 
     @Autowired
-    PetMapper petMapper;
+    private PetMapper petMapper;
 
     @Override
     public int add(Pet pet) {
