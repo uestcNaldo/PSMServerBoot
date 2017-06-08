@@ -16,21 +16,21 @@ public class PhotoServiceImpl implements PhotoService {
 
     @Override
     public int add(Photo photo) {
-        return photoMapper.add(photo);
+        return this.photoMapper.add(photo);
     }
 
     @Override
     public int deleteById(Long id) {
-        return photoMapper.deleteById(id);
+        return this.photoMapper.deleteById(id);
     }
 
     @Override
     public Photo queryPhotoById(Long id) {
-        return photoMapper.queryPhotoById(id);
+        return this.photoMapper.queryPhotoById(id);
     }
 
     @Override
     public List<Photo> queryPhotoListAll() {
-        return photoMapper.queryPhotoListAll();
+        return this.photoMapper.queryPhotoListAll();
     }
 }

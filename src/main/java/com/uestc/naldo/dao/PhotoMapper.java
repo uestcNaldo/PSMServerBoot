@@ -2,12 +2,11 @@ package com.uestc.naldo.dao;
 
 import com.uestc.naldo.domain.Photo;
 import org.apache.ibatis.annotations.*;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-/**
- * Created by Naldo on 2017/6/6.
- */
+@Component
 public interface PhotoMapper {
 
     @Insert("INSERT INTO photo(phid, phname, phpath) VALUES(null, #{name}, #{path})")
